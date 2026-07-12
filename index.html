@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitácora IA SENA — Arquitecto Experto</title>
+  <meta name="description" content="Convierte notas crudas de obra en una bitácora profesional del SENA con ayuda de IA." />
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">📐</span>
+      <div>
+        <h1>Bitácora IA <span>SENA</span></h1>
+        <p class="tagline">Arquitecto Experto en Automatización de Edificaciones</p>
+      </div>
+    </div>
+    <button id="configBtn" class="btn btn-ghost" type="button" aria-label="Configuración">
+      ⚙️ Configuración
+    </button>
+  </header>
+
+  <main class="layout">
+    <!-- Panel de entrada -->
+    <section class="panel" aria-labelledby="entradaTitle">
+      <h2 id="entradaTitle">1. Datos de la jornada</h2>
+
+      <div class="grid-2">
+        <label class="field">
+          <span>Fecha</span>
+          <input type="date" id="fecha" />
+        </label>
+        <label class="field">
+          <span>Fase del Proyecto</span>
+          <select id="fase">
+            <option value="Análisis">Análisis</option>
+            <option value="Planeación">Planeación</option>
+            <option value="Ejecución">Ejecución</option>
+            <option value="Evaluación">Evaluación</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Ubicación / Sede</span>
+        <input type="text" id="ubicacion" placeholder="Ej. Centro de la Construcción - SENA / Trabajo de campo, Melgar" />
+      </label>
+
+      <label class="field">
+        <span>Programa de Formación / Ficha</span>
+        <input type="text" id="programa" placeholder="Ej. Automatización de Edificaciones — Ficha 123456" />
+      </label>
+
+      <label class="field">
+        <span>Notas sueltas del día <em>(escribe como quieras)</em></span>
+        <textarea id="notas" rows="9" placeholder="Ej. Hoy fuimos a Melgar a revisar el terreno. Medimos el lote con cinta y miramos dónde poner los sensores de humedad para el riego. El Arduino no leía el sensor pero era un cable suelto. Mañana armamos el plano."></textarea>
+      </label>
+
+      <button id="generarBtn" class="btn btn-primary" type="button">
+        ✨ Generar Bitácora
+      </button>
+      <p id="statusMsg" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Panel de resultado -->
+    <section class="panel" aria-labelledby="resultTitle">
+      <div class="panel-head">
+        <h2 id="resultTitle">2. Bitácora profesional</h2>
+        <div class="result-actions">
+          <button id="copyBtn" class="btn btn-ghost" type="button" disabled>📋 Copiar</button>
+          <button id="downloadBtn" class="btn btn-ghost" type="button" disabled>⬇️ Descargar .md</button>
+        </div>
+      </div>
+      <div id="resultado" class="result" aria-live="polite">
+        <p class="placeholder">La bitácora generada aparecerá aquí, estructurada y lista para entregar.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de configuración -->
+  <div id="configModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="configTitle">
+      <h2 id="configTitle">Configuración de IA</h2>
+      <p class="modal-desc">
+        Ingresa tu <strong>API Key de OpenAI</strong>. Se guarda únicamente en este navegador
+        (localStorage) y nunca se envía a este repositorio.
+      </p>
+
+      <label class="field">
+        <span>OpenAI API Key</span>
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>Modelo</span>
+        <select id="modelo">
+          <option value="gpt-4o-mini">gpt-4o-mini (rápido y económico)</option>
+          <option value="gpt-4o">gpt-4o (mayor calidad)</option>
+          <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+          <option value="gpt-4.1">gpt-4.1</option>
+        </select>
+      </label>
+
+      <p class="hint">
+        ¿No tienes una key? Obtén una en
+        <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.
+      </p>
+
+      <div class="modal-actions">
+        <button id="cancelConfig" class="btn btn-ghost" type="button">Cancelar</button>
+        <button id="saveConfig" class="btn btn-primary" type="button">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>Herramienta educativa para aprendices SENA · Tus datos y tu API key permanecen en tu navegador.</p>
+  </footer>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
