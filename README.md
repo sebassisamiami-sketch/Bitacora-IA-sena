@@ -18,8 +18,20 @@ La IA actúa como un **Arquitecto Experto, Especialista en Automatización de Ed
   6. Recursos e Insumos Utilizados
   7. Plan de Acción para la Próxima Jornada
   8. Registro Fotográfico / Evidencia (con marcadores `[Insertar Evidencia X]`)
+- **Exportación a Word (`.docx`)** con **selección de plantilla** (Moderno / Oficial SENA), conservando márgenes, colores y tipografías del diseño original.
 - Botones para **copiar** y **descargar** la bitácora en formato Markdown (`.md`).
+- La IA responde en **JSON estructurado**, lo que garantiza un formato consistente e impecable (separa los datos de la presentación).
 - **Sin servidor**: es una página estática. Tu **API Key se guarda solo en tu navegador** (localStorage) y nunca se sube al repositorio.
+
+### 📄 Sobre las plantillas de Word
+
+Las plantillas viven en `assets/plantillas/*.docx` y usan la sintaxis de [docxtemplater](https://docxtemplater.com/):
+etiquetas como `{objetivo_tecnico}` para valores simples y bucles `{#actividades_realizadas}{.}{/actividades_realizadas}`
+para listas. La IA solo aporta los datos (JSON); el estilo lo define el `.docx`.
+
+> Puedes crear tus propias plantillas en Word con esas etiquetas, guardarlas en `assets/plantillas/`
+> y añadir la opción en el menú desplegable de `index.html`. Para regenerar las plantillas de ejemplo:
+> `python3 tools/build_templates.py`.
 
 ---
 
@@ -62,12 +74,20 @@ Luego visita **http://localhost:8000** en tu navegador.
 
 ```
 Bitacora-IA-sena/
-├── index.html        # Interfaz de usuario
-├── README.md         # Este archivo
+├── index.html                 # Interfaz de usuario
+├── README.md                  # Este archivo
+├── assets/
+│   └── plantillas/            # Plantillas Word (.docx) para exportación
+│       ├── plantilla_moderna.docx
+│       └── plantilla_sena_oficial.docx
+├── ejemplos/
+│   └── bitacora-ejemplo-melgar.md   # Bitácora de referencia
+├── tools/
+│   └── build_templates.py     # Script que genera las plantillas .docx
 └── src/
-    ├── app.js        # Lógica: formulario, llamada a OpenAI, render y descarga
-    ├── prompt.js     # Prompt maestro "Arquitecto Experto SENA"
-    └── styles.css    # Estilos (paleta verde SENA + acero)
+    ├── app.js                 # Lógica: OpenAI (JSON), render, Word y Markdown
+    ├── prompt.js              # Prompt maestro "Arquitecto Experto SENA" (JSON)
+    └── styles.css             # Estilos (paleta verde SENA + acero)
 ```
 
 ---

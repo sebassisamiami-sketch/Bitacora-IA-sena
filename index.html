@@ -68,8 +68,16 @@
       <div class="panel-head">
         <h2 id="resultTitle">2. Bitácora profesional</h2>
         <div class="result-actions">
-          <button id="copyBtn" class="btn btn-ghost" type="button" disabled>📋 Copiar</button>
-          <button id="downloadBtn" class="btn btn-ghost" type="button" disabled>⬇️ Descargar .md</button>
+          <label class="tpl-select">
+            <span class="sr-only">Plantilla de documento</span>
+            <select id="plantilla" title="Estilo del documento Word">
+              <option value="assets/plantillas/plantilla_moderna.docx">Estilo: Moderno</option>
+              <option value="assets/plantillas/plantilla_sena_oficial.docx">Estilo: Oficial SENA</option>
+            </select>
+          </label>
+          <button id="downloadWordBtn" class="btn btn-primary btn-sm" type="button" disabled>📄 Descargar Word</button>
+          <button id="copyBtn" class="btn btn-ghost btn-sm" type="button" disabled>📋 Copiar</button>
+          <button id="downloadBtn" class="btn btn-ghost btn-sm" type="button" disabled>⬇️ .md</button>
         </div>
       </div>
       <div id="resultado" class="result" aria-live="polite">
@@ -117,6 +125,11 @@
   <footer class="app-footer">
     <p>Herramienta educativa para aprendices SENA · Tus datos y tu API key permanecen en tu navegador.</p>
   </footer>
+
+  <!-- Librerías para generación de Word (.docx) desde plantillas -->
+  <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.7/dist/pizzip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.69.0/docxtemplater.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
   <script type="module" src="src/app.js"></script>
 </body>
